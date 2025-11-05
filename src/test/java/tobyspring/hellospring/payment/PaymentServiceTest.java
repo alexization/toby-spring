@@ -3,7 +3,6 @@ package tobyspring.hellospring.payment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 
 import static java.math.BigDecimal.TEN;
@@ -12,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class PaymentServiceTest {
 
-    private static void testAmount(BigDecimal exRate, BigDecimal convertedAmount) throws IOException {
+    private static void testAmount(BigDecimal exRate, BigDecimal convertedAmount) {
         PaymentService paymentService = new PaymentService(new ExRateProviderStub(exRate));
 
         Payment payment = paymentService.prepare(1L, "USD", TEN);
@@ -23,7 +22,7 @@ class PaymentServiceTest {
 
     @Test
     @DisplayName("prepare 메소드가 요구사항 3가지를 잘 충족했는지 검증")
-    void convertedAmount() throws IOException {
+    void convertedAmount() {
         testAmount(valueOf(500), valueOf(5_000));
         testAmount(valueOf(1_000), valueOf(10_000));
         testAmount(valueOf(3_000), valueOf(30_000));
