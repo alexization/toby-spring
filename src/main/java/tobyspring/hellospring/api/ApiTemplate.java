@@ -8,6 +8,18 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public class ApiTemplate {
+    private final ApiExecutor apiExecutor;
+    private final ExRateExtractor exRateExtractor;
+
+    public ApiTemplate() {
+        this.apiExecutor = new HttpClientApiExecutor();
+        this.exRateExtractor = new ErApiExrateExtractor();
+    }
+
+    public BigDecimal getExRate(String url) {
+        return this.getExRate(url, this.apiExecutor, this.exRateExtractor);
+    }
+
     public BigDecimal getExRate(String url, ApiExecutor apiExecutor, ExRateExtractor exRateExtractor) {
         URI uri;
         try {
